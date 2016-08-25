@@ -15,7 +15,7 @@ This program checks the sections you wish to register in for openings. This is d
 2. Install Python 3.5.2 if not installed
 3. Install all dependencies
   * This can be done easily by installing pip3
-  * Then running pip3 install bs4
+  * Then running "pip3 install bs4"
   * etc.
 4. Create a file that lists all of the CRN's you want to check for openings as done in "CRN_example.txt"
   * Alternatively, you can just edit "CRN_example.txt and use that
