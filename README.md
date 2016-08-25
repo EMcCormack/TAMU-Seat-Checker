@@ -19,5 +19,6 @@ This program checks the sections you wish to register in for openings. This is d
   * etc.
 4. Create a file that lists all of the CRN's you want to check for openings as done in "CRN_example.txt"
   * Alternatively, you can just edit "CRN_example.txt and use that
+  * Note: currently there is no maximum limit to the number of CRN's that can be added
 5. Edit "main.py" to use your phone number and file create in Step 4
 6. Run "python3  main.py"
