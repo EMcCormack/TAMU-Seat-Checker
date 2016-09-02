@@ -5,7 +5,6 @@
 ### Dependencies for Python3:
 * requests  
 * bs4 
-* time
 
 ### About:
 This program checks the sections you wish to register in for openings. This is done by reading the CRN's from a text file and scraping the webpage that publicly shares the number of remaining seats for your desired section. If there's an opening, a text message will be sent to your provided phone number alerting you using the TextBelt API. Upon running the program, openings will be checked for periodically (~30 minutes). This isn't done too frequently to reduce the load on your computer and the TAMU servers and ensure that you won't be disconnected. This process ends upon exiting the python program. 
