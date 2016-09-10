@@ -13,7 +13,7 @@ def seat_checker(crn):
 	seats=[]
 	response = requests.get(url, headers=headers, params=payload)
 	body = response.content
-	soup = BeautifulSoup(body,'lxml')
+	soup = BeautifulSoup(body,'html.parser')
 	for div in soup.find_all('div', attrs={'class':'pagebodydiv'}):
 		for table in div.find_all('table',attrs={'class':'datadisplaytable'}):
 			for sub_table in table.find_all('table',attrs={'class':'datadisplaytable'}):
