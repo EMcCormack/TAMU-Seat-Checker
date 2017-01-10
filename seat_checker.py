@@ -9,7 +9,7 @@ def seat_checker(crn):
 	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
 
 	url = "https://compass-ssb.tamu.edu/pls/PROD/bwykschd.p_disp_detail_sched"
-	payload = {'term_in': '201631', 'crn_in': crn}
+	payload = {'term_in': '201711', 'crn_in': crn}
 	seats=[]
 	response = requests.get(url, headers=headers, params=payload)
 	body = response.content
