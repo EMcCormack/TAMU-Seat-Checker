@@ -1,26 +1,18 @@
 #!/usr/bin/env python3
 
 import requests
-from bs4 import BeautifulSoup
+from lxml import html
 
-def seat_checker(crn):
-	"""Check capacity, actual, and remaining seats for crn course"""
 
-	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
+def seat_checker(crn, term):
+    """Check capacity, actual, and remaining seats for crn course"""
 
-	url = "https://compass-ssb.tamu.edu/pls/PROD/bwykschd.p_disp_detail_sched"
-	payload = {'term_in': '201711', 'crn_in': crn}
-	seats=[]
-	response = requests.get(url, headers=headers, params=payload)
-	body = response.content
-	soup = BeautifulSoup(body,'html.parser')
-	for div in soup.find_all('div', attrs={'class':'pagebodydiv'}):
-		for table in div.find_all('table',attrs={'class':'datadisplaytable'}):
-			for sub_table in table.find_all('table',attrs={'class':'datadisplaytable'}):
-				for td in sub_table.find_all('td',attrs={'class':'dddefault'}):
-					info=td.renderContents().decode("utf-8")
-					seats.append(info)
-	capacity = int(seats[0])
-	actual = int(seats[1])
-	remaining = int(seats[2])
-	return capacity, actual, remaining
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
+    url = "https://compass-ssb.tamu.edu/pls/PROD/bwykschd.p_disp_detail_sched"
+    payload = {'term_in': term, 'crn_in': crn}
+    page = requests.get(url, headers=headers, params=payload)
+    tree = html.fromstring(page.content)
+    capacity = int(tree.xpath('/html/body/div[3]/table[1]/tr[2]/td/table/tr[2]/td[1]/text()')[0])
+    actual = int(tree.xpath('/html/body/div[3]/table[1]/tr[2]/td/table/tr[2]/td[2]/text()')[0])
+    remaining = int(tree.xpath('/html/body/div[3]/table[1]/tr[2]/td/table/tr[2]/td[3]/text()')[0])
+    return capacity, actual, remaining
